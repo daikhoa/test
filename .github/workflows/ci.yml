@@ -9,7 +9,8 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: write  # Cần thiết để tạo GitHub Release
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 21
