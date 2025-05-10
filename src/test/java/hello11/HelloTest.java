@@ -11,6 +11,6 @@ class HelloTest {
 	@Test
     void testSayHello() {
         
-        assertEquals("HelloWod", helloworld.sayHello());
+        assertEquals("HelloWorld", helloworld.sayHello());
     }
 }
