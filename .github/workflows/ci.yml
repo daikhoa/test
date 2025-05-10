@@ -26,13 +26,13 @@ jobs:
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         uses: actions/upload-artifact@v4
         with:
-          name: helloworld-jar
-          path: target/helloworld-1.0-SNAPSHOT.jar
+          name: demo-jar
+          path: target/demo-1.0-SNAPSHOT.jar
       - name: Create GitHub Release
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         uses: softprops/action-gh-release@v2
         with:
-          files: target/helloworld-1.0-SNAPSHOT.jar
+          files: target/demo-1.0-SNAPSHOT.jar
           tag_name: v${{ github.run_number }}
           name: Release v${{ github.run_number }}
           draft: false
