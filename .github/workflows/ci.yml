@@ -9,8 +9,6 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write  # Cần thiết để tạo GitHub Release
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 21
@@ -18,8 +16,13 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
-      - name: Build with Maven
-        run: mvn -B package --file pom.xml
       - name: Run Tests
         run: mvn test
-      
+      - name: Trigger Render Deploy
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        run: |
+          curl -X POST \
+          -H "Authorization: Bearer ${{ secrets.RENDER_API_TOKEN }}" \
+          -H "Content-Type: application/json" \
+          -d '{"serviceId": "${{ secrets.RENDER_SERVICE_ID }}"}' \
+          https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}/deploys
