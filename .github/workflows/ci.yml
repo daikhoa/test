@@ -22,20 +22,4 @@ jobs:
         run: mvn -B package --file pom.xml
       - name: Run Tests
         run: mvn test
-      - name: Upload JAR Artifact
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-        uses: actions/upload-artifact@v4
-        with:
-          name: demo-jar
-          path: target/demo-1.0-SNAPSHOT.jar
-      - name: Create GitHub Release
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-        uses: softprops/action-gh-release@v2
-        with:
-          files: target/demo-1.0-SNAPSHOT.jar
-          tag_name: v${{ github.run_number }}
-          name: Release v${{ github.run_number }}
-          draft: false
-          prerelease: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
