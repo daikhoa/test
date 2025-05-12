@@ -2,7 +2,7 @@ name: Java CI/CD with Maven
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master]
 
 jobs:
   ci-cd:
